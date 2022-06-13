@@ -25,12 +25,15 @@ const LoginForm = () => {
           onChangeText={onChangeUsername}
           value={username}
           placeholder="Username"
+          textContentType="username"
         />
         <TextInput
           style={styles.input}
           onChangeText={onChangePassword}
           value={password}
           placeholder="Password"
+          secureTextEntry={true}
+          textContentType="password"
         />
       </View>
       <Button title="Login" style={styles.loginbutton}>
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     width: 200,
+    backgroundColor: "#fff",
   },
   loginbutton: {
     width: 200,

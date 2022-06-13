@@ -8,7 +8,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 60,
     fontWeight: "300",
-    color: "#222",
+    color: "#444",
+    textShadowColor: "#aaa",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 3,
   },
 });
 
