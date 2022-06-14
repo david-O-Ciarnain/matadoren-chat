@@ -7,11 +7,16 @@ import {
   TextInput,
   Button,
 } from "react-native";
+import MainView from "../views/MainView";
 import Header from "./Header";
 
 const LoginForm = () => {
-  const [username, onChangeUsername] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleLogin = () => {
+    console.log(username, password);
+  };
 
   return (
     <View style={styles.container}>
@@ -22,23 +27,24 @@ const LoginForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeUsername}
+          onChangeText={setUsername}
           value={username}
           placeholder="Username"
           textContentType="username"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangePassword}
+          onChangeText={setPassword}
           value={password}
           placeholder="Password"
           secureTextEntry={true}
           textContentType="password"
         />
       </View>
-      <Button title="Login" style={styles.loginbutton}>
-        <Text>Login</Text>
-      </Button>
+      <View style={styles.btngroup}>
+        <Button title="Sign in" style={styles.button} onPress={handleLogin} />
+        <Button title="Register" style={styles.button} disabled={true} />
+      </View>
     </View>
   );
 };
@@ -59,14 +65,16 @@ const styles = StyleSheet.create({
     width: 200,
     backgroundColor: "#fff",
   },
-  loginbutton: {
-    width: 200,
-  },
   inputfields: {
     marginVertical: 20,
   },
   linethrough: {
     textDecorationLine: "line-through",
+  },
+  btngroup: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-evenly",
+    width: 200,
   },
 });
 
