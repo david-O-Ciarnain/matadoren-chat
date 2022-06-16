@@ -5,17 +5,24 @@ import {
   Text,
   View,
   TextInput,
-  Button,
+  TouchableOpacity,
 } from "react-native";
-import MainView from "../views/MainView";
 import Header from "./Header";
 
 const LoginForm = () => {
-  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleLogin = () => {
-    console.log(username, password);
+    console.log(`Sign in Pressed! Email: ${email}, Password: ${password}`);
+  };
+
+  const handleRegister = () => {
+    console.log("Register Pressed!");
+  };
+
+  const handleForgot = () => {
+    console.log("Forgot password Pressed!");
   };
 
   return (
@@ -27,10 +34,10 @@ const LoginForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={setUsername}
-          value={username}
-          placeholder="Username"
-          textContentType="username"
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Email"
+          textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
@@ -40,11 +47,18 @@ const LoginForm = () => {
           secureTextEntry={true}
           textContentType="password"
         />
+        <TouchableOpacity>
+          <Text style={styles.forgotText} onPress={handleForgot}>
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.btngroup}>
-        <Button title="Sign in" style={styles.button} onPress={handleLogin} />
-        <Button title="Register" style={styles.button} disabled={true} />
-      </View>
+      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
+        <Text style={styles.btnText}>SIGN IN</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btns} onPress={handleRegister}>
+        <Text style={styles.btnText}>REGISTER</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -66,15 +80,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   inputfields: {
-    marginVertical: 20,
+    marginTop: 20,
+    alignItems: "center",
   },
   linethrough: {
     textDecorationLine: "line-through",
   },
-  btngroup: {
-    flexDirection: "row-reverse",
-    justifyContent: "space-evenly",
-    width: 200,
+  btns: {
+    width: "50%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: "#2D232E",
+  },
+  btnText: {
+    color: "#fff",
+  },
+  forgotText: {
+    fontWeight: "600",
   },
 });
 

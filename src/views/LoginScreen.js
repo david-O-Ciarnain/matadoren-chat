@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Dimensions,
-} from "react-native";
+import { View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 import LoginForm from "../components/LoginForm";
 
 const LoginScreen = () => {
