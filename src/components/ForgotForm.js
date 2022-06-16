@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Dimensions,
   StyleSheet,
   Text,
   View,
@@ -15,8 +14,7 @@ const ForgotForm = () => {
   const navigation = useNavigation();
 
   const handleForgot = () => {
-    console.log(`Forogt pressed! ${email}`);
-    navigation.navigate("MainView");
+    console.log(`Forgot pressed! ${email}`);
   };
 
   return (
