@@ -4,6 +4,7 @@ import MainView from "./src/views/MainView";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RegisterScreen from "./src/views/RegisterScreen";
+import ForgotPWScreen from "./src/views/ForgotPWScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -21,7 +22,16 @@ export default function App() {
           component={MainView}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen
+          name="RegisterScreen"
+          component={RegisterScreen}
+          options={{ title: "Register at Matadoren" }}
+        />
+        <Stack.Screen
+          name="ForgotPWScreen"
+          component={ForgotPWScreen}
+          options={{ title: "Forgot your password?" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
