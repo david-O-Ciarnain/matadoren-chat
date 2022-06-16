@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import RegisterForm from "./src/components/RegisterForm";
 import LoginScreen from "./src/views/LoginScreen";
 import MainView from "./src/views/MainView";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RegisterScreen from "./src/views/RegisterScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
