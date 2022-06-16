@@ -8,13 +8,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Header from "./Header";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleLogin = () => {
     console.log(`Sign in Pressed! Email: ${email}, Password: ${password}`);
+    navigation.navigate("MainView");
   };
 
   const handleRegister = () => {
