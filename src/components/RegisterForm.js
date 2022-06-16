@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Header from "./Header";
+import { useNavigation } from "@react-navigation/native";
 
 const RegisterForm = () => {
   const [email, setEmail] = React.useState("");
@@ -15,11 +16,13 @@ const RegisterForm = () => {
   const [username, setUsername] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
+  const navigation = useNavigation();
 
   const handleRegister = () => {
     console.log(
       `Register pressed! ${email}, ${password}, ${username}, ${firstname}, ${lastname}`
     );
+    navigation.navigate("MainView");
   };
 
   return (

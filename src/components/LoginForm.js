@@ -22,6 +22,7 @@ const LoginForm = () => {
 
   const handleRegister = () => {
     console.log("Register Pressed!");
+    navigation.navigate("RegisterScreen");
   };
 
   const handleForgot = () => {

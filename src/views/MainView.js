@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Dimensions,
-} from "react-native";
+import { View, Text } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 const MainView = () => {

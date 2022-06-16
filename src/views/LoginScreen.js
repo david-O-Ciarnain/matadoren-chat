@@ -1,7 +1,7 @@
 import { View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 import LoginForm from "../components/LoginForm";
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
