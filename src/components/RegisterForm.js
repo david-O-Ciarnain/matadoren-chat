@@ -9,28 +9,23 @@ import {
 } from "react-native";
 import Header from "./Header";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  const handleLogin = () => {
-    console.log(`Sign in Pressed! Email: ${email}, Password: ${password}`);
-  };
+  const [username, setUsername] = React.useState("");
+  const [firstname, setFirstname] = React.useState("");
+  const [lastname, setLastname] = React.useState("");
 
   const handleRegister = () => {
-    console.log("Register Pressed!");
-  };
-
-  const handleForgot = () => {
-    console.log("Forgot password Pressed!");
+    console.log(
+      `Register pressed! ${email}, ${password}, ${username}, ${firstname}, ${lastname}`
+    );
   };
 
   return (
     <View style={styles.container}>
       <Header />
-      <Text>
-        Please sign in <Text style={styles.linethrough}>or register below</Text>
-      </Text>
+      <Text>Fill in the form below to become a Matador user</Text>
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
@@ -47,15 +42,28 @@ const LoginForm = () => {
           secureTextEntry={true}
           textContentType="password"
         />
-        <TouchableOpacity>
-          <Text style={styles.forgotText} onPress={handleForgot}>
-            Forgot password?
-          </Text>
-        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          onChangeText={setUsername}
+          value={username}
+          placeholder="Username"
+          textContentType="username"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setFirstname}
+          value={firstname}
+          placeholder="Firstname"
+          textContentType="name"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setLastname}
+          value={lastname}
+          placeholder="Lastname"
+          textContentType="familyName"
+        />
       </View>
-      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
-        <Text style={styles.btnText}>SIGN IN</Text>
-      </TouchableOpacity>
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
         <Text style={styles.btnText}>REGISTER</Text>
       </TouchableOpacity>
@@ -68,24 +76,21 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   input: {
     height: 40,
-    margin: 12,
+    margin: 6,
     borderWidth: 1,
-    borderRadius: 6,
+    borderRadius: 12,
     borderColor: "#777",
     padding: 10,
-    width: 200,
+    width: 300,
     backgroundColor: "#fff",
   },
   inputfields: {
     marginTop: 20,
     alignItems: "center",
-  },
-  linethrough: {
-    textDecorationLine: "line-through",
   },
   btns: {
     width: "50%",
@@ -99,9 +104,6 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#fff",
   },
-  forgotText: {
-    fontWeight: "600",
-  },
 });
 
-export default LoginForm;
+export default RegisterForm;
