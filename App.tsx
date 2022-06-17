@@ -6,6 +6,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RegisterScreen from "./src/views/RegisterScreen";
 import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import { BlurView } from "expo-blur";
+import ChatScreen from "./src/views/ChatScreen";
+import MessageScreen from "./src/views/MessageScreen";
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -23,6 +26,18 @@ export default function App() {
           component={MainView}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen 
+        name="Messages"
+        component={MessageScreen}
+        options={{ headerShown: false }}
+        />
+        <Stack.Screen
+         name="Chat" 
+         component={ChatScreen}
+         options={{headerShown: false}}
+         />
+
         <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
