@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   input: {
-    height: 40,
+    height: 50,
     margin: 12,
     borderWidth: 1,
-    borderRadius: 6,
+    borderRadius: 25,
     borderColor: "#777",
-    padding: 10,
-    width: 200,
+    padding: 15,
+    width: 250,
     backgroundColor: "#fff",
   },
   inputfields: {

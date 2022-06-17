@@ -5,7 +5,6 @@ const MainView = () => {
   return (
     <View>
       <Text>MainView</Text>
-      <StatusBar style="auto" hidden={true} />
     </View>
   );
 };

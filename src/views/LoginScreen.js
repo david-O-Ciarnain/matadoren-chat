@@ -1,4 +1,10 @@
-import { View, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+  StatusBar,
+} from "react-native";
 import LoginForm from "../components/LoginForm";
 
 const LoginScreen = () => {
@@ -10,6 +16,7 @@ const LoginScreen = () => {
         style={styles.backgroundimage}
       >
         <LoginForm></LoginForm>
+        <StatusBar style="auto" hidden={true} />
       </ImageBackground>
     </View>
   );
