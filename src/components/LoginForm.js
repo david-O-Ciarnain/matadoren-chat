@@ -27,14 +27,13 @@ const LoginForm = () => {
 
   const handleForgot = () => {
     console.log("Forgot password Pressed!");
+    navigation.navigate("ForgotPWScreen");
   };
 
   return (
     <View style={styles.container}>
       <Header />
-      <Text>
-        Please sign in <Text style={styles.linethrough}>or register below</Text>
-      </Text>
+      <Text>Please sign in or register below</Text>
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
@@ -69,27 +68,24 @@ const LoginForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get("window").height,
+    height: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   input: {
-    height: 40,
+    height: 50,
     margin: 12,
     borderWidth: 1,
-    borderRadius: 6,
+    borderRadius: 25,
     borderColor: "#777",
-    padding: 10,
-    width: 200,
+    padding: 15,
+    width: 250,
     backgroundColor: "#fff",
   },
   inputfields: {
     marginTop: 20,
     alignItems: "center",
-  },
-  linethrough: {
-    textDecorationLine: "line-through",
   },
   btns: {
     width: "50%",

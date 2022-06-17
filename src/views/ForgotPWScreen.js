@@ -1,13 +1,7 @@
-import {
-  View,
-  StyleSheet,
-  ImageBackground,
-  Dimensions,
-  StatusBar,
-} from "react-native";
-import LoginForm from "../components/LoginForm";
+import { View, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import ForgotForm from "../components/ForgotForm";
 
-const LoginScreen = () => {
+const ForgotPWScreen = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -15,8 +9,7 @@ const LoginScreen = () => {
         resizeMode="cover"
         style={styles.backgroundimage}
       >
-        <LoginForm></LoginForm>
-        <StatusBar style="auto" hidden={true} />
+        <ForgotForm />
       </ImageBackground>
     </View>
   );
@@ -35,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default ForgotPWScreen;
