@@ -30,13 +30,16 @@ export default function App() {
         <Stack.Screen 
         name="Messages"
         component={MessageScreen}
-        options={{ headerShown: false }}
+        options={{ 
+          headerShown: false,
+          title:"Messages" 
+        }}
         />
         <Stack.Screen
          name="Chat" 
          component={ChatScreen}
          options={{headerShown: false}}
-         />
+         /> 
 
         <Stack.Screen
           name="RegisterScreen"

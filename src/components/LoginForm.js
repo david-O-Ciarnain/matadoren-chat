@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
@@ -29,6 +30,10 @@ const LoginForm = () => {
     console.log("Forgot password Pressed!");
     navigation.navigate("ForgotPWScreen");
   };
+
+  const goToMessages = () =>{
+    navigation.navigate("Messages")
+  }
 
   return (
     <View style={styles.container}>
@@ -62,7 +67,12 @@ const LoginForm = () => {
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
         <Text style={styles.btnText}>REGISTER</Text>
       </TouchableOpacity>
+
+      <View>
+        <Button onPress={goToMessages}>testing messages</Button>
+      </View>
     </View>
+    
   );
 };
 
