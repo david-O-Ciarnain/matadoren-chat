@@ -20,28 +20,28 @@ export default function MessageScreen(){
         {
             id: "1",
             userName:"demo",
-            userImg: "de",
+            userImg: require("../../assets/loginscreen2.jpg"),
             messageTime:"200 years ago",
             messageText:"viva la revolution"
         },
         {
             id: "2",
             userName:"demo",
-            userImg: "de",
+            userImg: require("../../assets/splash(this).png"),
             messageTime:"300 years ago",
             messageText:"america F**k yeah"
         },
         {
             id: "3",
             userName:"sven",
-            userImg: "sv",
+            userImg: require("../../assets/icon.png"),
             messageTime:"100 years ago",
             messageText:"socsarna tar över"
         },
         {
             id: "4",
             userName:"team tripple d",
-            userImg: "da",
+            userImg: require("../../assets/favicon.png"),
             messageTime:"1 hour ago",
             messageText:"guns'n roses suger"
         }
@@ -56,8 +56,17 @@ export default function MessageScreen(){
                   <Card>
                     <UserInfo>
                         <UserImgWrapper>
-                            <UserInfo>{item.userName}</UserInfo>
+                            <UserImg source={item.userImg}/>
                         </UserImgWrapper>
+                        <TextSection>
+                            
+                            <UserInfoText>
+                            <UserName>{item.userName}</UserName>
+                            <postTime>{item.messageTime}</postTime>
+                            </UserInfoText>
+                            <MessageText>{item.messageText}</MessageText>
+                            
+                        </TextSection>
                     </UserInfo>
                   </Card>
                 )}
