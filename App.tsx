@@ -7,12 +7,14 @@ import RegisterScreen from "./src/views/RegisterScreen";
 import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import ChatScreen from "./src/views/ChatScreen";
 import MessageScreen from "./src/views/MessageScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const BottomTab = createBottomTabNavigator();
 
-  return (
-    <NavigationContainer>
+  const MainStack = () => {
+    return (
       <Stack.Navigator>
         <Stack.Screen
           name="LoginScreen"
@@ -64,6 +66,14 @@ export default function App() {
           }}
         />
       </Stack.Navigator>
+    );
+  };
+  return (
+    <NavigationContainer>
+      <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+        <BottomTab.Screen name="MainStack" component={MainStack} />
+        <BottomTab.Screen name="MessageScreen" component={MessageScreen} />
+      </BottomTab.Navigator>
     </NavigationContainer>
   );
 }
