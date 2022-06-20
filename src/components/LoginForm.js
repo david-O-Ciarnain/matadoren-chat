@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
+import { handleLogin } from "../components/hooks/useAppUser";
 
 const LoginForm = () => {
   const navigation = useNavigation();
@@ -22,12 +23,12 @@ const LoginForm = () => {
     });
   };
 
-  const handleLogin = () => {
-    console.log(
-      `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
-    );
-    navigation.navigate("BottomTabStack");
-  };
+  // const handleLogin = () => {
+  //   console.log(
+  //     `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
+  //   );
+  //   navigation.navigate("BottomTabStack");
+  // };
 
   const handleRegister = () => {
     console.log("Register Pressed!");
@@ -65,7 +66,10 @@ const LoginForm = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
+      <TouchableOpacity
+        style={styles.btns}
+        onPress={() => handleLogin(credentials)}
+      >
         <Text style={styles.btnText}>SIGN IN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
