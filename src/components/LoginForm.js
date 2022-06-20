@@ -39,9 +39,9 @@ const LoginForm = () => {
     navigation.navigate("ForgotPWScreen");
   };
 
-  const goToMessages = () =>{
-    navigation.navigate("Messages")
-  }
+  const goToMessages = () => {
+    navigation.navigate("Messages");
+  };
 
   return (
     <View style={styles.container}>
@@ -69,18 +69,13 @@ const LoginForm = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
+      <TouchableOpacity style={styles.btns} onPress={goToMessages}>
         <Text style={styles.btnText}>SIGN IN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
         <Text style={styles.btnText}>REGISTER</Text>
       </TouchableOpacity>
-
-      <View>
-        <Button onPress={goToMessages}>testing messages</Button>
-      </View>
     </View>
-    
   );
 };
 
