@@ -77,6 +77,11 @@ export default function App() {
                 headerBackTitleVisible: false,
               })}
             />
+            <Stack.Screen
+              name="SearchScreen"
+              component={SearchScreen}
+              options={{ headerShown: false }}
+            />
           </>
         ) : (
           <>
