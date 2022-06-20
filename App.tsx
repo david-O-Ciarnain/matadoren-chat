@@ -40,6 +40,8 @@ export default function App() {
          name="ChatScreen" 
          component={ChatScreen}
         options={({route}) => ({
+
+          // this works don't know why it gives me a red line, mabey typeScript? 
           title:route.params.userName
         })}
          /> 
