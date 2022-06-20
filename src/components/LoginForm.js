@@ -26,7 +26,7 @@ const LoginForm = () => {
     console.log(
       `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
     );
-    navigation.navigate("MainView");
+    navigation.navigate("BottomTabStack");
   };
 
   const handleRegister = () => {
@@ -37,10 +37,6 @@ const LoginForm = () => {
   const handleForgot = () => {
     console.log("Forgot password Pressed!");
     navigation.navigate("ForgotPWScreen");
-  };
-
-  const goToMessages = () => {
-    navigation.navigate("BottomTabStack");
   };
 
   return (
@@ -69,7 +65,7 @@ const LoginForm = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btns} onPress={goToMessages}>
+      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
         <Text style={styles.btnText}>SIGN IN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
