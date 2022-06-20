@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
 const SearchScreen = () => {
   return (
@@ -12,7 +13,9 @@ const SearchScreen = () => {
       <Text>Search for conversations:</Text>
       <TextInput placeholder="Username" style={styles.input}></TextInput>
       <TouchableOpacity style={styles.btns}>
-        <Text style={styles.btnText}>Search</Text>
+        <Text style={styles.btnText}>
+          <Entypo name="magnifying-glass" size={24} color="white" />
+        </Text>
       </TouchableOpacity>
     </View>
   );
