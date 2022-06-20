@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    height: 40,
-    margin: 6,
+    height: 50,
+    margin: 12,
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: 25,
     borderColor: "#777",
-    padding: 10,
-    width: 300,
+    padding: 15,
+    width: 250,
     backgroundColor: "#fff",
   },
   inputfields: {

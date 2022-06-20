@@ -65,7 +65,10 @@ const LoginForm = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btns} onPress={handleLogin}>
+      <TouchableOpacity
+        style={styles.btns}
+        onPress={() => handleLogin(credentials)}
+      >
         <Text style={styles.btnText}>SIGN IN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
