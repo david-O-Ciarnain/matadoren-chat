@@ -1,15 +1,38 @@
 import { StyleSheet } from "react-native";
 import LoginScreen from "./src/views/LoginScreen";
-import MainView from "./src/views/MainView";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RegisterScreen from "./src/views/RegisterScreen";
 import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import ChatScreen from "./src/views/ChatScreen";
 import MessageScreen from "./src/views/MessageScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const BottomTab = createBottomTabNavigator();
+
+  const BottomTabStack = () => {
+    return (
+      <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+        <BottomTab.Screen
+          name="MessageScreen"
+          component={MessageScreen}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="message-bulleted"
+                size={24}
+                color="black"
+              />
+            ),
+            headerShown: false,
+          }}
+        />
+      </BottomTab.Navigator>
+    );
+  };
 
   return (
     <NavigationContainer>
@@ -19,9 +42,10 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
-          name="MainView"
-          component={MainView}
+          name="BottomTabStack"
+          component={BottomTabStack}
           options={{ headerShown: false }}
         />
 

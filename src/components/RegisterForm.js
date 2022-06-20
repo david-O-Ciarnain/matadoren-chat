@@ -26,7 +26,7 @@ const RegisterForm = () => {
     const newUser = register;
     console.log(`Register pressed!`);
     console.log(newUser);
-    navigation.navigate("MainView");
+    navigation.navigate("BottomTabStack");
   };
 
   return (
