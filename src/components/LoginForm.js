@@ -40,7 +40,7 @@ const LoginForm = () => {
   };
 
   const goToMessages = () => {
-    navigation.navigate("Messages");
+    navigation.navigate("BottomTabStack");
   };
 
   return (

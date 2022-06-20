@@ -8,13 +8,34 @@ import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import ChatScreen from "./src/views/ChatScreen";
 import MessageScreen from "./src/views/MessageScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
 
-  const MainStack = () => {
+  const BottomTabStack = () => {
     return (
+      <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+        <BottomTab.Screen
+          name="MessageScreen"
+          component={MessageScreen}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="message-bulleted"
+                size={24}
+                color="black"
+              />
+            ),
+          }}
+        />
+      </BottomTab.Navigator>
+    );
+  };
+
+  return (
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="LoginScreen"
@@ -26,6 +47,7 @@ export default function App() {
           component={MainView}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="BottomTabStack" component={BottomTabStack} />
 
         <Stack.Screen
           name="Messages"
@@ -66,14 +88,6 @@ export default function App() {
           }}
         />
       </Stack.Navigator>
-    );
-  };
-  return (
-    <NavigationContainer>
-      <BottomTab.Navigator screenOptions={{ headerShown: false }}>
-        <BottomTab.Screen name="MainStack" component={MainStack} />
-        <BottomTab.Screen name="MessageScreen" component={MessageScreen} />
-      </BottomTab.Navigator>
     </NavigationContainer>
   );
 }
