@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     paddingBottom: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
   input: {
     height: 50,
