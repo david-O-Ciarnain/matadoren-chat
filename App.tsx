@@ -13,6 +13,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
 
+  // Change this variabel to false to see sign in, register and forgot pw screens.
   const isSignedIn = true;
 
   const BottomTabStack = () => {
