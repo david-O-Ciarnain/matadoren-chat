@@ -13,6 +13,8 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
 
+  const isSignedIn = true;
+
   const BottomTabStack = () => {
     return (
       <BottomTab.Navigator screenOptions={{ headerShown: false }}>
@@ -37,56 +39,61 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
+        {isSignedIn ? (
+          <>
+            <Stack.Screen
+              name="BottomTabStack"
+              component={BottomTabStack}
+              options={{ headerShown: false }}
+            />
 
-        <Stack.Screen
-          name="BottomTabStack"
-          component={BottomTabStack}
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="Messages"
-          component={MessageScreen}
-          options={{
-            headerShown: false,
-            title: "Messages",
-          }}
-        />
-        <Stack.Screen
-          name="ChatScreen"
-          component={ChatScreen}
-          options={({ route }) => ({
-            // this works don't know why it gives me a red line, mabey typeScript?
-            title: route.params.userName,
-            headerBackTitleVisible: false,
-          })}
-        />
-
-        <Stack.Screen
-          name="RegisterScreen"
-          component={RegisterScreen}
-          options={{
-            title: "Register at Matadoren",
-            headerTransparent: true,
-            headerTintColor: "#eee",
-            headerStyle: { backgroundColor: "rgba(0,0,0,0.55)" },
-          }}
-        />
-        <Stack.Screen
-          name="ForgotPWScreen"
-          component={ForgotPWScreen}
-          options={{
-            title: "Forgot your password?",
-            headerTransparent: true,
-            headerTintColor: "#eee",
-            headerStyle: { backgroundColor: "rgba(0,0,0,0.55)" },
-          }}
-        />
+            <Stack.Screen
+              name="Messages"
+              component={MessageScreen}
+              options={{
+                headerShown: false,
+                title: "Messages",
+              }}
+            />
+            <Stack.Screen
+              name="ChatScreen"
+              component={ChatScreen}
+              options={({ route }) => ({
+                // this works don't know why it gives me a red line, mabey typeScript?
+                title: route.params.userName,
+                headerBackTitleVisible: false,
+              })}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="LoginScreen"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="RegisterScreen"
+              component={RegisterScreen}
+              options={{
+                title: "Register at Matadoren",
+                headerTransparent: true,
+                headerTintColor: "#eee",
+                headerStyle: { backgroundColor: "rgba(0,0,0,0.55)" },
+              }}
+            />
+            <Stack.Screen
+              name="ForgotPWScreen"
+              component={ForgotPWScreen}
+              options={{
+                title: "Forgot your password?",
+                headerTransparent: true,
+                headerTintColor: "#eee",
+                headerStyle: { backgroundColor: "rgba(0,0,0,0.55)" },
+              }}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

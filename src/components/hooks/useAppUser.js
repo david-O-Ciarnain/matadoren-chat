@@ -1,6 +1,8 @@
-export const handleLogin = (user) => {
-  fetch("https://jsonplaceholder.typicode.com/todos/1", {
-    method: "GET",
+export const handleRegister = (user) => {
+  JSON.stringify(user);
+
+  fetch("localhost:8080/register/user/save", {
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: { user },
     credentials: "include",
