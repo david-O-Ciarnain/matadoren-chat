@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -6,17 +6,26 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const handleChange = (name, value) => {
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
+  };
 
   const handleLogin = () => {
-    console.log(`Sign in Pressed! Email: ${email}, Password: ${password}`);
+    console.log(
+      `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
+    );
     navigation.navigate("MainView");
   };
 
@@ -30,6 +39,10 @@ const LoginForm = () => {
     navigation.navigate("ForgotPWScreen");
   };
 
+  const goToMessages = () =>{
+    navigation.navigate("Messages")
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -37,15 +50,15 @@ const LoginForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={setEmail}
-          value={email}
+          onChangeText={(text) => handleChange("email", text)}
+          value={credentials.email}
           placeholder="Email"
           textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setPassword}
-          value={password}
+          onChangeText={(text) => handleChange("password", text)}
+          value={credentials.password}
           placeholder="Password"
           secureTextEntry={true}
           textContentType="password"
@@ -62,7 +75,12 @@ const LoginForm = () => {
       <TouchableOpacity style={styles.btns} onPress={handleRegister}>
         <Text style={styles.btnText}>REGISTER</Text>
       </TouchableOpacity>
+
+      <View>
+        <Button onPress={goToMessages}>testing messages</Button>
+      </View>
     </View>
+    
   );
 };
 
@@ -70,17 +88,17 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 250,
+    justifyContent: "flex-end",
+    paddingBottom: 20,
   },
   input: {
-    height: 40,
+    height: 50,
     margin: 12,
     borderWidth: 1,
-    borderRadius: 6,
+    borderRadius: 25,
     borderColor: "#777",
-    padding: 10,
-    width: 200,
+    padding: 15,
+    width: 250,
     backgroundColor: "#fff",
   },
   inputfields: {

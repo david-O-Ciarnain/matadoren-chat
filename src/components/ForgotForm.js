@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: 50,
+    justifyContent: "flex-end",
+    paddingBottom: 20,
   },
   paragraph: {
     width: "80%",

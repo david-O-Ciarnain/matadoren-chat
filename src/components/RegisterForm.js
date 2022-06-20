@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -9,19 +9,23 @@ import {
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
+import { User } from "../models/User";
 
 const RegisterForm = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [firstname, setFirstname] = React.useState("");
-  const [lastname, setLastname] = React.useState("");
   const navigation = useNavigation();
+  const [register, setRegister] = useState(new User());
+
+  const handleChange = (name, value) => {
+    setRegister({
+      ...register,
+      [name]: value,
+    });
+  };
 
   const handleRegister = () => {
-    console.log(
-      `Register pressed! ${email}, ${password}, ${username}, ${firstname}, ${lastname}`
-    );
+    const newUser = register;
+    console.log(`Register pressed!`);
+    console.log(newUser);
     navigation.navigate("MainView");
   };
 
@@ -32,37 +36,39 @@ const RegisterForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={setEmail}
-          value={email}
+          onChangeText={(text) => handleChange("email", text)}
+          value={register.email}
           placeholder="Email"
           textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setPassword}
-          value={password}
+          onChangeText={(text) => handleChange("password", text)}
+          value={register.password}
           placeholder="Password"
           secureTextEntry={true}
           textContentType="password"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setUsername}
-          value={username}
+          onChangeText={(text) => handleChange("username", text)}
+          value={register.username}
           placeholder="Username"
           textContentType="username"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setFirstname}
-          value={firstname}
+          onChangeText={(text) => handleChange("firstname", text)}
+          value={register.firstname}
           placeholder="Firstname"
           textContentType="name"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setLastname}
-          value={lastname}
+
+          onChangeText={(text) => handleChange("lastname", text)}
+          value={register.lastname}
+
           placeholder="Lastname"
           textContentType="familyName"
         />
