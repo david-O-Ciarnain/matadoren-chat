@@ -1,4 +1,4 @@
-import { Button, FlatList, StyleSheet, View,Text } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import {
     Container,
     Card,
@@ -7,14 +7,18 @@ import {
     UserImg,
     UserInfoText,
     UserName,
-    postTime,
     MessageText,
-    TextSection
+    TextSection,
+    PostTime
 } from "../components/style/MessagesStyles"
 
 
 
-export default function MessageScreen(){
+
+
+export default function MessageScreen({navigation}){
+
+  
 
     const testData = [
         {
@@ -53,7 +57,7 @@ export default function MessageScreen(){
                 data={testData}
                 keyExtractor={item => item.id}
                 renderItem={({item}) =>(
-                  <Card>
+                  <Card onPress={() => {navigation.navigate("ChatScreen",{userName:item.userName})}}>
                     <UserInfo>
                         <UserImgWrapper>
                             <UserImg source={item.userImg}/>
@@ -62,13 +66,14 @@ export default function MessageScreen(){
                             
                             <UserInfoText>
                             <UserName>{item.userName}</UserName>
-                            <postTime>{item.messageTime}</postTime>
+                            <PostTime>{item.messageTime}</PostTime>
                             </UserInfoText>
                             <MessageText>{item.messageText}</MessageText>
                             
                         </TextSection>
                     </UserInfo>
                   </Card>
+                  
                 )}
             />
            

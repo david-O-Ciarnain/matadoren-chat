@@ -12,7 +12,8 @@ import MessageScreen from "./src/views/MessageScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+ 
+  
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -36,9 +37,11 @@ export default function App() {
         }}
         />
         <Stack.Screen
-         name="Chat" 
+         name="ChatScreen" 
          component={ChatScreen}
-         options={{headerShown: false}}
+        options={({route}) => ({
+          title:route.params.userName
+        })}
          /> 
 
         <Stack.Screen

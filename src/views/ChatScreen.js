@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View,Text,Button } from "react-native";
 
 
 export default function ChatScreen(){
@@ -7,7 +7,7 @@ export default function ChatScreen(){
 
        <View style={styles.chatScreen}>
         <Text>Chat Screen</Text>
-        <Button tittle="Click me" onPress={() => {}} />
+        <Button title="Click me" onPress={() => {}} />
        </View>
 
     )

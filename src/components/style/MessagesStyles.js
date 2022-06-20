@@ -52,7 +52,7 @@ font-weight:bold;
 font-family:"Lato-Regular";
 `;
 
-export const postTime = styled.Text`
+export const PostTime = styled.Text`
 font-size: 6px;
 color:#66666;
 font-family:"Lata-Regular";
