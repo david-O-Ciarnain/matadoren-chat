@@ -6,8 +6,10 @@ import RegisterScreen from "./src/views/RegisterScreen";
 import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import ChatScreen from "./src/views/ChatScreen";
 import MessageScreen from "./src/views/MessageScreen";
+import SearchScreen from "./src/views/SearchScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -26,6 +28,16 @@ export default function App() {
                 size={24}
                 color="black"
               />
+            ),
+            headerShown: false,
+          }}
+        />
+        <BottomTab.Screen
+          name="SearchScreen"
+          component={SearchScreen}
+          options={{
+            tabBarIcon: () => (
+              <Entypo name="magnifying-glass" size={24} color="black" />
             ),
             headerShown: false,
           }}
