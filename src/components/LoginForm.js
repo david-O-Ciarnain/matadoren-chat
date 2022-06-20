@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -13,11 +13,19 @@ import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const handleChange = (name, value) => {
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
+  };
 
   const handleLogin = () => {
-    console.log(`Sign in Pressed! Email: ${email}, Password: ${password}`);
+    console.log(
+      `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
+    );
     navigation.navigate("MainView");
   };
 
@@ -42,15 +50,15 @@ const LoginForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={setEmail}
-          value={email}
+          onChangeText={(text) => handleChange("email", text)}
+          value={credentials.email}
           placeholder="Email"
           textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
-          onChangeText={setPassword}
-          value={password}
+          onChangeText={(text) => handleChange("password", text)}
+          value={credentials.password}
           placeholder="Password"
           secureTextEntry={true}
           textContentType="password"
