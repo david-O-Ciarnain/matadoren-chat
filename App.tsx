@@ -6,10 +6,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RegisterScreen from "./src/views/RegisterScreen";
 import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import { BlurView } from "expo-blur";
+import ChatScreen from "./src/views/ChatScreen";
+import MessageScreen from "./src/views/MessageScreen";
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+ 
+  
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -23,6 +27,26 @@ export default function App() {
           component={MainView}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen 
+        name="Messages"
+        component={MessageScreen}
+        options={{ 
+          headerShown: false,
+          title:"Messages" 
+        }}
+        />
+        <Stack.Screen
+         name="ChatScreen" 
+         component={ChatScreen}
+        options={({route}) => ({
+
+          // this works don't know why it gives me a red line, mabey typeScript? 
+          title:route.params.userName,
+          headerBackTitleVisible:false
+        })}
+         /> 
+
         <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}

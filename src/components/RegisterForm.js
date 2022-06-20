@@ -65,8 +65,10 @@ const RegisterForm = () => {
         />
         <TextInput
           style={styles.input}
+
           onChangeText={(text) => handleChange("lastname", text)}
           value={register.lastname}
+
           placeholder="Lastname"
           textContentType="familyName"
         />
