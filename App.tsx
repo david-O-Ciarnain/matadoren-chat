@@ -42,7 +42,8 @@ export default function App() {
         options={({route}) => ({
 
           // this works don't know why it gives me a red line, mabey typeScript? 
-          title:route.params.userName
+          title:route.params.userName,
+          headerBackTitleVisible:false
         })}
          /> 
 

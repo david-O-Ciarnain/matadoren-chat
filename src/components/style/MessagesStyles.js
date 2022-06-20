@@ -53,7 +53,7 @@ font-family:"Lato-Regular";
 `;
 
 export const PostTime = styled.Text`
-font-size: 6px;
+font-size: 12px;
 color:#66666;
 font-family:"Lata-Regular";
 `;
