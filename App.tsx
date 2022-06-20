@@ -50,14 +50,6 @@ export default function App() {
         />
 
         <Stack.Screen
-          name="Messages"
-          component={MessageScreen}
-          options={{
-            headerShown: false,
-            title: "Messages",
-          }}
-        />
-        <Stack.Screen
           name="ChatScreen"
           component={ChatScreen}
           options={({ route }) => ({
