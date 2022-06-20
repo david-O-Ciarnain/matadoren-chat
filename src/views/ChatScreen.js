@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View, Text, Button, ImageBackground } from "react-native";
-import { Bubble, GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
+import { FontAwesome } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons'; 
+import { View} from "react-native";
+
+
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState([]);
@@ -30,33 +34,53 @@ export default function ChatScreen() {
     ]);
   }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((prevMessages) => GiftedChat.append(prevMessages, messages));
-  }, []);
 
-  const renderBubble = (props) => {
-    return (
-      <ImageBackground source={require("../../assets/chatBackgrund.jpg")}>
+    const onSend = useCallback((messages = []) =>{
+        setMessages(prevMessages => GiftedChat.append(prevMessages,messages))
+    },[])
+
+    const renderBubble = (props) => {
+        return (
+           
         <Bubble
-          {...props}
-          wrapperStyle={{
-            left: {
-              backgroundColor: "#fff",
+        {...props}
+        wrapperStyle={{
+            left:{
+                backgroundColor:"#550055",
             },
-            right: {
-              backgroundColor: "#000",
+            right:{
+                backgroundColor:"#550055", 
+            }
+        }}
+        textStyle={{
+            right:{
+                color:"#fff",
             },
-          }}
-          textStyle={{
-            right: {
-              color: "#fff",
-              textAlign: "center",
-            },
-          }}
+            left:{
+                color:"#fff"
+            }
+        }}
         />
-      </ImageBackground>
-    );
-  };
+
+        )
+    }
+    const renderSend = (props) => {
+        return(
+            <Send {...props}>
+                <View>
+                <FontAwesome 
+                name="send" 
+                size={24} 
+                style={{marginBottom: 10,marginRight:10}} 
+                color="black" 
+                />
+                </View>
+            </Send>
+           
+        )
+    }
+
+    const scrollToBottomCompenent = () => <Feather name="chevrons-down" size={24} color="black" />
 
   return (
     <GiftedChat
@@ -66,13 +90,13 @@ export default function ChatScreen() {
         _id: 1,
       }}
       renderBubble={renderBubble}
-    />
-  );
+
+      alwaysShowSend
+      renderSend={renderSend}
+      scrollToBottom
+      scrollToBottomComponent={scrollToBottomCompenent}
+      />
+
+    )
 }
-const styles = StyleSheet.create({
-  chatScreen: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+
