@@ -49,16 +49,14 @@ margin-bottom:5px;
 export const UserName = styled.Text`
 font-size:14px;
 font-weight:bold;
-font-family:"Lato-Regular";
+font-family:"monospace";
 `;
 
 export const PostTime = styled.Text`
 font-size: 12px;
-color:#66666;
-font-family:"Lata-Regular";
+font-family:"monospace";
 `;
 
 export const MessageText = styled.Text`
 font-size:14px;
-color:#33333;
 `;
