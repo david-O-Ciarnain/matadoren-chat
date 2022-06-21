@@ -28,7 +28,7 @@ const RegisterForm = () => {
     insert(newUser)
       .then((res) => {
         console.log("insert res", res);
-        navigation.navigate("BottomTabStack");
+        // navigation.navigate("BottomTabStack");
       })
       .catch((err) => console.log(err));
   };

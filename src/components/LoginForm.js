@@ -10,10 +10,12 @@ import {
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
+import { getUserByEmail } from "../database/SqUtils";
 
 const LoginForm = () => {
   const navigation = useNavigation();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleChange = (name, value) => {
     setCredentials({
@@ -26,11 +28,21 @@ const LoginForm = () => {
     console.log(
       `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
     );
-    navigation.navigate("BottomTabStack");
+    getUserByEmail(credentials.email)
+      .then((res) => {
+        console.log("Login Result:", res);
+        if (credentials.password === res[0].password) {
+          console.log("Yes");
+          setLoggedIn(true);
+        } else {
+          console.log("No");
+        }
+      })
+      .catch((err) => console.log("Login Error: ", err));
+    // navigation.navigate("BottomTabStack");
   };
 
   const handleRegister = () => {
-    console.log("Register Pressed!");
     navigation.navigate("RegisterScreen");
   };
 

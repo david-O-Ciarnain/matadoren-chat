@@ -11,7 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
-import { getTableInfo, initDB } from "./src/database/SqUtils";
+import { dropTable, getTableInfo, initDB } from "./src/database/SqUtils";
 
 export default function App() {
   useEffect(() => {
