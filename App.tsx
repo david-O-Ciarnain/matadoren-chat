@@ -10,13 +10,24 @@ import SearchScreen from "./src/views/SearchScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { useEffect } from "react";
+import { getTableInfo, initDB } from "./src/database/SqUtils";
 
 export default function App() {
+  useEffect(() => {
+    initDB()
+      .then((res) => {
+        console.log("result from init", res);
+        return getTableInfo();
+      })
+      .then((res) => console.log("pragma table_info", res))
+      .catch((err) => console.log(err));
+  });
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
 
   // Change this variabel to false to see sign in, register and forgot pw screens.
-  const isSignedIn = true;
+  const isSignedIn = false;
 
   const BottomTabStack = () => {
     return (

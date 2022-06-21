@@ -10,6 +10,7 @@ import {
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
 import { User } from "../models/User";
+import { insert } from "../database/SqUtils";
 
 const RegisterForm = () => {
   const navigation = useNavigation();
@@ -24,9 +25,12 @@ const RegisterForm = () => {
 
   const handleRegister = () => {
     const newUser = register;
-    console.log(`Register pressed!`);
-    console.log(newUser);
-    navigation.navigate("BottomTabStack");
+    insert(newUser)
+      .then((res) => {
+        console.log("insert res", res);
+        navigation.navigate("BottomTabStack");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
