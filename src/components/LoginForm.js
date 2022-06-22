@@ -13,7 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
   const navigation = useNavigation();
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
 
   const handleChange = (name, value) => {
     setCredentials({
@@ -24,7 +27,7 @@ const LoginForm = () => {
 
   const handleLogin = () => {
     console.log(
-      `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
+      `Sign in Pressed! Email: ${credentials.username}, Password: ${credentials.password}`
     );
     navigation.navigate("BottomTabStack");
   };
@@ -46,10 +49,10 @@ const LoginForm = () => {
       <View style={styles.inputfields}>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => handleChange("email", text)}
-          value={credentials.email}
-          placeholder="Email"
-          textContentType="emailAddress"
+          onChangeText={(text) => handleChange("username", text)}
+          value={credentials.username}
+          placeholder="Username"
+          textContentType="username"
         />
         <TextInput
           style={styles.input}
