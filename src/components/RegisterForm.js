@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -6,10 +6,12 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
 import { User } from "../models/User";
+import { registerUser } from "./hooks/useUser";
 
 const RegisterForm = () => {
   const navigation = useNavigation();
@@ -23,10 +25,10 @@ const RegisterForm = () => {
   };
 
   const handleRegister = () => {
-    const newUser = register;
-    console.log(`Register pressed!`);
-    console.log(newUser);
-    navigation.navigate("BottomTabStack");
+    registerUser(register);
+    // TODO: Must only alert and navigate if new user was created!
+    Alert.alert("New Matadoren User created!");
+    navigation.navigate("LoginScreen");
   };
 
   return (

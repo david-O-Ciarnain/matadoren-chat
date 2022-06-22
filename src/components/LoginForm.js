@@ -10,16 +10,10 @@ import {
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
-import { BASE_URL } from "@env";
-import { fetchUser } from "./hooks/useUser";
 
 const LoginForm = () => {
   const navigation = useNavigation();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   const handleChange = (name, value) => {
     setCredentials({

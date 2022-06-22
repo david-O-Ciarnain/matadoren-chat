@@ -1,9 +1,6 @@
 import { BASE_URL } from "@env";
 
-// Change name to createUser.......
-export const fetchUser = () => {
-  console.log(BASE_URL + "/register/user/save");
-
+export const registerUser = (user) => {
   fetch(BASE_URL + "/register/user/save", {
     method: "POST",
     headers: {
@@ -11,13 +8,11 @@ export const fetchUser = () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      firstName: "Douglas",
-      lastName: "Alexandersson",
-      username: "Redhawks",
-      password: "abc123",
-      roles: "USER",
+      firstName: user.firstname,
+      lastName: user.lastname,
+      username: user.username,
+      email: user.email,
+      password: user.password,
     }),
-  })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  }).catch((err) => console.log(err));
 };
