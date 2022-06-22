@@ -10,10 +10,13 @@ import {
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
+import { BASE_URL } from "@env";
 
 const LoginForm = () => {
   const navigation = useNavigation();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  console.log(BASE_URL);
 
   const handleChange = (name, value) => {
     setCredentials({

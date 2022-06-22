@@ -16,7 +16,7 @@ export default function App() {
   const BottomTab = createBottomTabNavigator();
 
   // Change this variabel to false to see sign in, register and forgot pw screens.
-  const isSignedIn = true;
+  const isSignedIn = false;
 
   const BottomTabStack = () => {
     return (
