@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -11,12 +11,15 @@ import {
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
 import { BASE_URL } from "@env";
+import { fetchUser } from "./hooks/useUser";
 
 const LoginForm = () => {
   const navigation = useNavigation();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  console.log(BASE_URL);
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const handleChange = (name, value) => {
     setCredentials({
