@@ -26,7 +26,7 @@ const LoginForm = () => {
     console.log(
       `Sign in Pressed! Email: ${credentials.email}, Password: ${credentials.password}`
     );
-    navigation.navigate("BottomTabStack");
+    // navigation.navigate("BottomTabStack");
   };
 
   const handleRegister = () => {

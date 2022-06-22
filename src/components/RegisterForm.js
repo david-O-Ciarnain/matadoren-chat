@@ -9,12 +9,10 @@ import {
   Alert,
 } from "react-native";
 import Header from "./Header";
-import { useNavigation } from "@react-navigation/native";
 import { User } from "../models/User";
 import { registerUser } from "./hooks/useUser";
 
 const RegisterForm = () => {
-  const navigation = useNavigation();
   const [register, setRegister] = useState(new User());
 
   const handleChange = (name, value) => {
@@ -27,8 +25,6 @@ const RegisterForm = () => {
   const handleRegister = () => {
     registerUser(register);
     // TODO: Must only alert and navigate if new user was created!
-    Alert.alert("New Matadoren User created!");
-    navigation.navigate("LoginScreen");
   };
 
   return (
