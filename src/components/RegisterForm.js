@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -6,7 +6,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import Header from "./Header";
 import { User } from "../models/User";

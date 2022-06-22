@@ -35,16 +35,3 @@ export const registerUser = (user) => {
       Alert.alert(JSON.stringify(`Something went wrong, ${err}`))
     );
 };
-
-// export const loginUser = (user) => {
-//     fetch(BASE_URL + "/login", {
-//         method: "POST",
-//         headers: {
-//             Authorization:
-//         },
-//         body: JSON.stringify({
-//             username: user.username,
-//             password: user.password,
-//         }),
-//     }).catch(err => console.log(err))
-// }
