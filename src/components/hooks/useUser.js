@@ -1,5 +1,6 @@
 import { BASE_URL } from "@env";
 
+// Change name to createUser.......
 export const fetchUser = () => {
   console.log(BASE_URL + "/register/user/save");
 
@@ -16,5 +17,7 @@ export const fetchUser = () => {
       password: "abc123",
       roles: "USER",
     }),
-  }).catch((err) => console.log(err));
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
