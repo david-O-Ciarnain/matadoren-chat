@@ -3,6 +3,7 @@ import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import { View} from "react-native";
+import Chatroom from "../components/chat/Chatroom";
 
 
 
