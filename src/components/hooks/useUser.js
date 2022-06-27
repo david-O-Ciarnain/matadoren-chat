@@ -16,3 +16,18 @@ export const registerUser = (user) => {
     }),
   }).catch((err) => console.log(err));
 };
+
+export const getUser = user => {
+  fetch(`${BASE_URL}/register/user/get`,{
+    method:"GET",
+    headers:{
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify({
+      firstName:user.firstName,
+      lastName:user.lastName,
+      username:user.username,
+    }),
+  }).catch(err => console.log(err))
+}
