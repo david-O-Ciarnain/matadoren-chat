@@ -13,6 +13,7 @@ import { Entypo } from "@expo/vector-icons";
 import { UserContext } from "./src/components/hooks/UserContext";
 import { useState } from "react";
 import { User } from "./src/models/User";
+import { getValueFor } from "./src/components/hooks/useSecureStore";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ export default function App() {
 
   // Change this variabel to false to see sign in, register and forgot pw screens.
   const isSignedIn = false;
+  getValueFor("access_token");
 
   const BottomTabStack = () => {
     return (

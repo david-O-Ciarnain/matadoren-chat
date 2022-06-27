@@ -1,5 +1,6 @@
 import { BASE_URL } from "@env";
 import { Alert } from "react-native";
+import { save } from "../hooks/useSecureStore";
 
 export const registerUser = (user) => {
   fetch(BASE_URL + "/register/user/save", {
@@ -48,6 +49,8 @@ export const loginUser = (user) => {
     .then((response) => response.json())
     .then((responseData) => {
       Alert.alert(`Login Success!, ${responseData.access_token}`);
+      console.log(responseData.access_token);
+      save("access_token", responseData.access_token);
     })
     .catch((err) => Alert.alert(`Something went wrong, ${err}`));
 };
