@@ -28,8 +28,6 @@ export default function AppEntry() {
       const value = await getValueFor("token");
       const jwt = JSON.parse(value);
 
-      console.log(jwt);
-
       authContext.setAuthState({
         accessToken: jwt.accessToken || null,
         refreshToken: jwt.refreshToken || null,
@@ -38,7 +36,7 @@ export default function AppEntry() {
       setStatus("success");
     } catch (error) {
       setStatus("error");
-      console.log(`Keychain Error: ${error.message}`);
+      // console.log(`Keychain Error: ${error.message}`);
       authContext.setAuthState({
         accessToken: null,
         refreshToken: null,

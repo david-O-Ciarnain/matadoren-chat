@@ -30,10 +30,6 @@ const LoginForm = () => {
   };
 
   const handleLogin = async () => {
-    const formData = new FormData();
-    formData.append("username", credentials.username);
-    formData.append("password", credentials.password);
-
     try {
       const response = await publicAxios.post("/login", credentials, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -54,12 +50,10 @@ const LoginForm = () => {
   };
 
   const handleRegister = () => {
-    console.log("Register Pressed!");
     navigation.navigate("RegisterScreen");
   };
 
   const handleForgot = () => {
-    console.log("Forgot password Pressed!");
     navigation.navigate("ForgotPWScreen");
   };
 

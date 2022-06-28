@@ -1,11 +1,4 @@
-import {
-  FlatList,
-  StyleSheet,
-  Button,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, StyleSheet, StatusBar, Button } from "react-native";
 import {
   Container,
   Card,
@@ -18,28 +11,27 @@ import {
   TextSection,
   PostTime,
 } from "../components/style/MessagesStyles";
-import {
-  deleteValueFor,
-  getValueFor,
-} from "../components/hooks/useSecureStore";
 import { AuthContext } from "../context/AuthContext";
-import { AxiosContext } from "../context/AxiosContext";
-import Spinner from "../components/Spinner";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import LogoutButton from "../components/LogoutButton";
+import jwtDecode from "jwt-decode";
 
 export default function MessageScreen({ navigation }) {
-  const axiosContext = useContext(AxiosContext);
+  // Line 21 - 28 is for decoding JWT tokens and accessing their username. :)
   const authContext = useContext(AuthContext);
-  const [status, setStatus] = useState("idle");
+  const [user, setUser] = useState("Undefined");
 
-  if (status === "loading") {
-    return <Spinner />;
-  }
+  useEffect(() => {
+    const token = authContext.authState.accessToken;
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken.sub.toString());
+  }, []);
 
   const testData = [
     {
       id: "1",
-      userName: "demo",
+      // userName is modified here for testing purposes.
+      userName: user,
       userImg: require("../../assets/loginscreen2.jpg"),
       messageTime: "200 years ago",
       messageText: "viva la revolution",
@@ -70,12 +62,7 @@ export default function MessageScreen({ navigation }) {
   return (
     <Container>
       <StatusBar style="auto" hidden={true} />
-      <TouchableOpacity
-        style={styles.btns}
-        onPress={() => authContext.logout()}
-      >
-        <Text style={styles.btnText}>SIGN OUT</Text>
-      </TouchableOpacity>
+      <LogoutButton />
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}
@@ -109,18 +96,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  btns: {
-    width: "50%",
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-    backgroundColor: "#2D232E",
-  },
-  btnText: {
-    color: "#fff",
   },
 });
