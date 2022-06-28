@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -10,11 +10,9 @@ import {
 import Header from "./Header";
 import { User } from "../models/User";
 import { registerUser } from "./hooks/useUser";
-import { UserContext } from "./hooks/UserContext";
 
 const RegisterForm = () => {
   const [register, setRegister] = useState(new User());
-  const { user, setUser } = useContext(UserContext);
 
   const handleChange = (name, value) => {
     setRegister({

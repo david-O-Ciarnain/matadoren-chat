@@ -10,15 +10,11 @@ import SearchScreen from "./src/views/SearchScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { UserContext } from "./src/components/hooks/UserContext";
-import { useEffect, useState } from "react";
-import { User } from "./src/models/User";
 import { getValueFor } from "./src/components/hooks/useSecureStore";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
-  const [user, setUser] = useState(new User());
 
   // Change this variabel to false to see sign in, register and forgot pw screens.
   const isSignedIn = getValueFor("access_token") !== null || undefined || "";
