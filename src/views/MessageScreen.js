@@ -1,11 +1,4 @@
-import {
-  FlatList,
-  StyleSheet,
-  Button,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, StyleSheet, StatusBar } from "react-native";
 import {
   Container,
   Card,
@@ -18,14 +11,11 @@ import {
   TextSection,
   PostTime,
 } from "../components/style/MessagesStyles";
-import {
-  deleteValueFor,
-  getValueFor,
-} from "../components/hooks/useSecureStore";
 import { AuthContext } from "../context/AuthContext";
 import { AxiosContext } from "../context/AxiosContext";
 import Spinner from "../components/Spinner";
 import { useContext, useState } from "react";
+import LogoutButton from "../components/LogoutButton";
 
 export default function MessageScreen({ navigation }) {
   const axiosContext = useContext(AxiosContext);
@@ -70,12 +60,7 @@ export default function MessageScreen({ navigation }) {
   return (
     <Container>
       <StatusBar style="auto" hidden={true} />
-      <TouchableOpacity
-        style={styles.btns}
-        onPress={() => authContext.logout()}
-      >
-        <Text style={styles.btnText}>SIGN OUT</Text>
-      </TouchableOpacity>
+      <LogoutButton />
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}
@@ -109,21 +94,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  btns: {
-    width: "75%",
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
-    backgroundColor: "#2D232E",
-  },
-  btnText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 8,
   },
 });
