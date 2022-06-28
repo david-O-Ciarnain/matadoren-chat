@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, StatusBar } from "react-native";
+import { FlatList, StyleSheet, StatusBar, Button } from "react-native";
 import {
   Container,
   Card,
@@ -12,24 +12,26 @@ import {
   PostTime,
 } from "../components/style/MessagesStyles";
 import { AuthContext } from "../context/AuthContext";
-import { AxiosContext } from "../context/AxiosContext";
-import Spinner from "../components/Spinner";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LogoutButton from "../components/LogoutButton";
+import jwtDecode from "jwt-decode";
 
 export default function MessageScreen({ navigation }) {
-  const axiosContext = useContext(AxiosContext);
+  // Line 21 - 28 is for decoding JWT tokens and accessing their username. :)
   const authContext = useContext(AuthContext);
-  const [status, setStatus] = useState("idle");
+  const [user, setUser] = useState("Undefined");
 
-  if (status === "loading") {
-    return <Spinner />;
-  }
+  useEffect(() => {
+    const token = authContext.authState.accessToken;
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken.sub.toString());
+  }, []);
 
   const testData = [
     {
       id: "1",
-      userName: "demo",
+      // userName is modified here for testing purposes.
+      userName: user,
       userImg: require("../../assets/loginscreen2.jpg"),
       messageTime: "200 years ago",
       messageText: "viva la revolution",
