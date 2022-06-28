@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -7,13 +7,20 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Alert,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
 import { loginUser } from "./hooks/useUser";
+import { AuthContext } from "../context/AuthContext";
+import * as SecureStore from "expo-secure-store";
+import { AxiosContext } from "../context/AxiosContext";
+import { save } from "./hooks/useSecureStore";
 
 const LoginForm = () => {
   const navigation = useNavigation();
+  const authContext = useContext(AuthContext);
+  const { publicAxios } = useContext(AxiosContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -26,12 +33,27 @@ const LoginForm = () => {
     });
   };
 
-  const handleLogin = () => {
-    console.log(
-      `Sign in Pressed! Email: ${credentials.username}, Password: ${credentials.password}`
-    );
-    loginUser(credentials);
-    // navigation.navigate("BottomTabStack");
+  const handleLogin = async () => {
+    const formData = new FormData();
+    formData.append("username", credentials.username);
+    formData.append("password", credentials.password);
+
+    try {
+      const response = await publicAxios.post("/login", credentials, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const { accessToken, refreshToken } = response.data;
+      authContext.setAuthState({
+        accessToken,
+        refreshToken,
+        authenticated: true,
+      });
+
+      await save("token", JSON.stringify({ accessToken, refreshToken }));
+    } catch (error) {
+      Alert.alert("Login Failed", error.response.data.message);
+    }
   };
 
   const handleRegister = () => {

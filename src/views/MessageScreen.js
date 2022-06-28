@@ -15,8 +15,20 @@ import {
   deleteValueFor,
   getValueFor,
 } from "../components/hooks/useSecureStore";
+import { AuthContext } from "../context/AuthContext";
+import { AxiosContext } from "../context/AxiosContext";
+import Spinner from "../components/Spinner";
+import { useContext, useState } from "react";
 
 export default function MessageScreen({ navigation }) {
+  const axiosContext = useContext(AxiosContext);
+  const authContext = useContext(AuthContext);
+  const [status, setStatus] = useState("idle");
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
+
   const testData = [
     {
       id: "1",
@@ -50,14 +62,7 @@ export default function MessageScreen({ navigation }) {
 
   return (
     <Container>
-      <Button
-        title="Sign Out"
-        onPress={() => deleteValueFor("access_token")}
-      ></Button>
-      <Button
-        title="Check value"
-        onPress={() => getValueFor("access_token")}
-      ></Button>
+      <Button title="Sign Out" onPress={() => authContext.logout()}></Button>
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}

@@ -6,11 +6,7 @@ export async function save(key, value) {
 
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
-  if (result) {
-    alert("Access_Token: " + result);
-  } else {
-    alert("Not found.");
-  }
+  return result;
 }
 
 export async function deleteValueFor(key) {

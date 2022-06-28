@@ -36,21 +36,3 @@ export const registerUser = (user) => {
       Alert.alert(JSON.stringify(`Something went wrong, ${err}`))
     );
 };
-
-export const loginUser = (user) => {
-  let formData = new FormData();
-  formData.append("username", user.username);
-  formData.append("password", user.password);
-
-  fetch(BASE_URL + "/login", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((responseData) => {
-      Alert.alert(`Login Success!, ${responseData.access_token}`);
-      console.log(responseData.access_token);
-      save("access_token", responseData.access_token);
-    })
-    .catch((err) => Alert.alert(`Something went wrong, ${err}`));
-};

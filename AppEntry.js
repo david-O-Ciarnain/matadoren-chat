@@ -11,13 +11,48 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { getValueFor } from "./src/components/hooks/useSecureStore";
+import { AuthContext, AuthProvider } from "./src/context/AuthContext";
+import { AxiosProvider } from "./src/context/AxiosContext";
+import { useCallback, useContext, useEffect, useState } from "react";
+import Spinner from "./src/components/Spinner";
 
-export default function App() {
+export default function AppEntry() {
   const Stack = createNativeStackNavigator();
   const BottomTab = createBottomTabNavigator();
+  const authContext = useContext(AuthContext);
+  const [status, setStatus] = useState("loading");
 
-  // Change this variabel to false to see sign in, register and forgot pw screens.
-  const isSignedIn = getValueFor("access_token") !== null || undefined || "";
+  const loadJWT = useCallback(async () => {
+    try {
+      const value = await getValueFor("token");
+      const jwt = JSON.parse(value);
+
+      console.log(jwt.accessToken, jwt.refreshToken);
+
+      authContext.setAuthState({
+        accessToken: jwt.accessToken || null,
+        refreshToken: jwt.refreshToken || null,
+        authenticated: jwt.accessToken !== null,
+      });
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      console.log(`Keychain Error: ${error.message}`);
+      authContext.setAuthState({
+        accessToken: null,
+        refreshToken: null,
+        authenticated: false,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    loadJWT();
+  }, [loadJWT]);
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   const BottomTabStack = () => {
     return (
@@ -53,7 +88,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isSignedIn ? (
+        {authContext?.authState?.authenticated ? (
           <>
             <Stack.Screen
               name="BottomTabStack"
