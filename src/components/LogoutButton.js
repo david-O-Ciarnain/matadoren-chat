@@ -1,6 +1,10 @@
+import { useCallback, useContext } from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { AuthContext } from "../context/AuthContext";
 
 const LogoutButton = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <TouchableOpacity style={styles.btns} onPress={() => authContext.logout()}>
       <Text style={styles.btnText}>SIGN OUT</Text>
