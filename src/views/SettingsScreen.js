@@ -5,13 +5,13 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BASE_URL } from "@env";
+import { AuthContext } from "../context/AuthContext";
 
 const SettingsScreen = () => {
   const [username, setUsername] = useState();
-
-
+  const authContext = useContext(AuthContext);
 
   const changeUsername = (data) => {
     fetch(BASE_URL + "/update/{username}", {
@@ -24,6 +24,7 @@ const SettingsScreen = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Success! Username changed to: ", data);
+        authContext.logout();
       })
       .catch((err) => {
         console.log("Error: ", err);
@@ -40,10 +41,7 @@ const SettingsScreen = () => {
         placeholder="New username"
         textContentType="username"
       />
-      <TouchableOpacity
-        style={styles.btns}
-        onPress={changeUsername(username)}
-      >
+      <TouchableOpacity style={styles.btns} onPress={changeUsername(username)}>
         <Text style={styles.btnText}>OK</Text>
       </TouchableOpacity>
     </View>
