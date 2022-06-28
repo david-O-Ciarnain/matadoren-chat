@@ -12,3 +12,7 @@ export async function getValueFor(key) {
     alert("Not found.");
   }
 }
+
+export async function deleteValueFor(key) {
+  await SecureStore.deleteItemAsync(key);
+}

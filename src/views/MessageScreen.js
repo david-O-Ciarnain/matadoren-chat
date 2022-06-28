@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, Button } from "react-native";
 import {
   Container,
   Card,
@@ -11,6 +11,10 @@ import {
   TextSection,
   PostTime,
 } from "../components/style/MessagesStyles";
+import {
+  deleteValueFor,
+  getValueFor,
+} from "../components/hooks/useSecureStore";
 
 export default function MessageScreen({ navigation }) {
   const testData = [
@@ -46,6 +50,14 @@ export default function MessageScreen({ navigation }) {
 
   return (
     <Container>
+      <Button
+        title="Sign Out"
+        onPress={() => deleteValueFor("access_token")}
+      ></Button>
+      <Button
+        title="Check value"
+        onPress={() => getValueFor("access_token")}
+      ></Button>
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}
