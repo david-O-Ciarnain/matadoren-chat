@@ -11,8 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { getValueFor } from "./src/components/hooks/useSecureStore";
-import { AuthContext, AuthProvider } from "./src/context/AuthContext";
-import { AxiosProvider } from "./src/context/AxiosContext";
+import { AuthContext } from "./src/context/AuthContext";
 import { useCallback, useContext, useEffect, useState } from "react";
 import Spinner from "./src/components/Spinner";
 

@@ -1,19 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Dimensions,
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Button,
   Alert,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
-import { loginUser } from "./hooks/useUser";
 import { AuthContext } from "../context/AuthContext";
-import * as SecureStore from "expo-secure-store";
 import { AxiosContext } from "../context/AxiosContext";
 import { save } from "./hooks/useSecureStore";
 

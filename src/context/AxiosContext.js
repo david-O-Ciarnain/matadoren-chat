@@ -40,7 +40,7 @@ const AxiosProvider = ({ children }) => {
     const options = {
       method: "POST",
       data,
-      url: BASE_URL + "/refresh",
+      url: BASE_URL + "/token/refresh",
     };
 
     return axios(options)

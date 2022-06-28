@@ -1,6 +1,5 @@
 import { BASE_URL } from "@env";
 import { Alert } from "react-native";
-import { save } from "../hooks/useSecureStore";
 
 export const registerUser = (user) => {
   fetch(BASE_URL + "/register/user/save", {

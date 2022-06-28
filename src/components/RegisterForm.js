@@ -23,7 +23,6 @@ const RegisterForm = () => {
 
   const handleRegister = () => {
     registerUser(register);
-    setUser(register);
     // TODO: Must only alert and navigate if new user was created!
   };
 
