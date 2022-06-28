@@ -5,11 +5,47 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { useState } from "react";
+import { BASE_URL } from "@env";
 
 const SettingsScreen = () => {
+  const [username, setUsername] = useState();
+
+
+
+  const changeUsername = (data) => {
+    fetch(BASE_URL + "/update/{username}", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Success! Username changed to: ", data);
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
+
   return (
-    <View>
-      <Text>This is the settings screen</Text>
+    <View style={styles.container}>
+      <Text>Change your username:</Text>
+      <TextInput
+        style={styles.input}
+        onChange={(text) => setUsername(text)}
+        value={username}
+        placeholder="New username"
+        textContentType="username"
+      />
+      <TouchableOpacity
+        style={styles.btns}
+        onPress={changeUsername(username)}
+      >
+        <Text style={styles.btnText}>OK</Text>
+      </TouchableOpacity>
     </View>
   );
 };
