@@ -39,7 +39,8 @@ const LoginForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      const { accessToken, refreshToken } = response.data;
+      const { access_token: accessToken, refresh_token: refreshToken } =
+        response.data;
       authContext.setAuthState({
         accessToken,
         refreshToken,

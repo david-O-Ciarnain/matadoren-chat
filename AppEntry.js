@@ -26,7 +26,7 @@ export default function AppEntry() {
       const value = await getValueFor("token");
       const jwt = JSON.parse(value);
 
-      console.log(jwt.accessToken, jwt.refreshToken);
+      console.log(jwt);
 
       authContext.setAuthState({
         accessToken: jwt.accessToken || null,

@@ -1,4 +1,11 @@
-import { FlatList, StyleSheet, Button } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Button,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import {
   Container,
   Card,
@@ -62,7 +69,13 @@ export default function MessageScreen({ navigation }) {
 
   return (
     <Container>
-      <Button title="Sign Out" onPress={() => authContext.logout()}></Button>
+      <StatusBar style="auto" hidden={true} />
+      <TouchableOpacity
+        style={styles.btns}
+        onPress={() => authContext.logout()}
+      >
+        <Text style={styles.btnText}>SIGN OUT</Text>
+      </TouchableOpacity>
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}
@@ -96,5 +109,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  btns: {
+    width: "50%",
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    backgroundColor: "#2D232E",
+  },
+  btnText: {
+    color: "#fff",
   },
 });
