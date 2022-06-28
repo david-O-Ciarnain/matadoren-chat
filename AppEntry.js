@@ -34,7 +34,7 @@ export default function AppEntry() {
       setStatus("success");
     } catch (error) {
       setStatus("error");
-      console.log(`Keychain Error: ${error.message}`);
+      // console.log(`Keychain Error: ${error.message}`);
       authContext.setAuthState({
         accessToken: null,
         refreshToken: null,
