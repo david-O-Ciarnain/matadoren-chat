@@ -5,13 +5,23 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BASE_URL } from "@env";
 import { AuthContext } from "../context/AuthContext";
+import DeleteUserForm from "../components/DeleteUserForm";
+import jwtDecode from "jwt-decode";
 
 const SettingsScreen = () => {
   const [username, setUsername] = useState();
   const authContext = useContext(AuthContext);
+
+  const [role, setRole] = useState("USER");
+
+  useEffect(() => {
+    const token = authContext.authState.accessToken;
+    const decodedToken = jwtDecode(token);
+    setRole(decodedToken.roles.toString());
+  }, []);
 
   const changeUsername = (data) => {
     fetch(BASE_URL + "/update/{username}", {
@@ -41,9 +51,22 @@ const SettingsScreen = () => {
         placeholder="New username"
         textContentType="username"
       />
-      <TouchableOpacity style={styles.btns} onPress={changeUsername(username)}>
+      <TouchableOpacity
+        style={styles.btns}
+        onPress={() => changeUsername(username)}
+      >
         <Text style={styles.btnText}>OK</Text>
       </TouchableOpacity>
+      {role === "ADMIN" ? (
+        <>
+          <DeleteUserForm />
+          <Text style={styles.role}>Your role is {role}</Text>
+        </>
+      ) : (
+        <>
+          <Text style={styles.role}>Your role is {role}</Text>
+        </>
+      )}
     </View>
   );
 };
@@ -53,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
   input: {
     height: 50,
@@ -76,6 +99,9 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#fff",
+  },
+  role: {
+    fontSize: 20,
   },
 });
 

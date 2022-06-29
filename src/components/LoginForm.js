@@ -31,7 +31,6 @@ const LoginForm = () => {
     });
   };
 
-
   const handleLogin = async () => {
     try {
       const response = await publicAxios.post("/login", credentials, {
@@ -50,7 +49,6 @@ const LoginForm = () => {
     } catch (error) {
       Alert.alert("Login Failed", error.response.data.message);
     }
-
   };
 
   const handleRegister = () => {
