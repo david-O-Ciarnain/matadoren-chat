@@ -8,26 +8,37 @@ import {
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
-import { User } from "../models/User";
-import axios from "axios";
+import { AxiosContext } from "../context/AxiosContext";
 
 const UpdateUserForm = () => {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
+
   const authContext = useContext(AuthContext);
+  const { authAxios } = useContext(AxiosContext);
+  const [token, setToken] = useState(authContext.authState.accessToken);
 
   useEffect(() => {
     console.log(username);
     console.log(newUsername);
-    const token = authContext.authState.accessToken;
+    console.log(token);
     const decodedToken = jwtDecode(token);
     setUsername(decodedToken.sub.toString());
   }, []);
 
-  const changeUsername = () => {
-    const body = { username: { username } };
-    const headers = {};
-    axios.put(`${BASE_URL}/update/${user.username}`, body, headers);
+  const changeUsername = async () => {
+    const body = {
+      username: newUsername,
+      firstName: "user",
+      lastName: "user",
+      password: "321",
+      email: "demo951@live.se",
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token ? `team7 ${token}` : "",
+    };
+    await authAxios.put(`/register/user/update/${username}`, body, { headers });
   };
 
   return (
@@ -42,7 +53,7 @@ const UpdateUserForm = () => {
         placeholder="New username"
         textContentType="username"
       />
-      <TouchableOpacity style={styles.btns} onPress={() => changeUsername()}>
+      <TouchableOpacity style={styles.btns} onPress={changeUsername}>
         <Text style={styles.btnText}>OK</Text>
       </TouchableOpacity>
     </View>

@@ -36,4 +36,14 @@ const SettingsScreen = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  role: {
+    fontSize: 20,
+  },
+});
+
 export default SettingsScreen;
