@@ -4,46 +4,20 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BASE_URL } from "@env";
 import { AuthContext } from "../context/AuthContext";
+import jwtDecode from "jwt-decode";
+import { User } from "../models/User";
+import UpdateUserForm from "../components/UpdateUserForm";
 
 const SettingsScreen = () => {
-  const [username, setUsername] = useState();
-  const authContext = useContext(AuthContext);
-
-  const changeUsername = (data) => {
-    fetch(BASE_URL + "/update/{username}", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Success! Username changed to: ", data);
-        authContext.logout();
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  };
 
   return (
     <View style={styles.container}>
-      <Text>Change your username:</Text>
-      <TextInput
-        style={styles.input}
-        onChange={(text) => setUsername(text)}
-        value={username}
-        placeholder="New username"
-        textContentType="username"
-      />
-      <TouchableOpacity style={styles.btns} onPress={changeUsername(username)}>
-        <Text style={styles.btnText}>OK</Text>
-      </TouchableOpacity>
+     <UpdateUserForm></UpdateUserForm>
     </View>
   );
 };
