@@ -1,9 +1,10 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import DeleteUserForm from "../components/DeleteUserForm";
 import jwtDecode from "jwt-decode";
 import UpdateUserForm from "../components/UpdateUserForm";
+import LogoutButton from "../components/LogoutButton";
 
 const SettingsScreen = () => {
   const authContext = useContext(AuthContext);
@@ -16,19 +17,22 @@ const SettingsScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <UpdateUserForm />
-      {role === "ADMIN" ? (
-        <>
-          <DeleteUserForm />
-          <Text style={styles.role}>Your role is {role}</Text>
-        </>
-      ) : (
-        <>
-          <Text style={styles.role}>Your role is {role}</Text>
-        </>
-      )}
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <LogoutButton />
+        <UpdateUserForm />
+        {role === "ADMIN" ? (
+          <>
+            <DeleteUserForm />
+            <Text style={styles.role}>Your role is {role}</Text>
+          </>
+        ) : (
+          <>
+            <Text style={styles.role}>Your role is {role}</Text>
+          </>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 

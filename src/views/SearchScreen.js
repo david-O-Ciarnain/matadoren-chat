@@ -6,23 +6,34 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import LogoutButton from "../components/LogoutButton";
 
 const SearchScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Search for conversations:</Text>
-      <TextInput placeholder="Username" style={styles.input}></TextInput>
-      <TouchableOpacity style={styles.btns}>
-        <Text style={styles.btnText}>
-          <Entypo name="magnifying-glass" size={24} color="white" />
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <View style={styles.container}>
+        <LogoutButton />
+      </View>
+      <View style={styles.containerContent}>
+        <Text>Search for conversations:</Text>
+        <TextInput placeholder="Username" style={styles.input}></TextInput>
+        <TouchableOpacity style={styles.btns}>
+          <Text style={styles.btnText}>
+            <Entypo name="magnifying-glass" size={24} color="white" />
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  containerContent: {
     flex: 1,
     backgroundColor: "#FFF",
     alignItems: "center",

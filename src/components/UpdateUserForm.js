@@ -4,73 +4,82 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { useContext, useState, useEffect } from "react";
-import { BASE_URL } from "@env";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
-import { User } from "../models/User";
 
 const UpdateUserForm = () => {
+  const [username, setUsername] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const authContext = useContext(AuthContext);
 
-    const [username, setUsername] = useState("");
-    const authContext = useContext(AuthContext);
-  
-    const [user, setUser] = useState(User);
-  
-    useEffect(() => {
-      const token = authContext.authState.accessToken;
-      const decodedToken = jwtDecode(token);
-      setUser(decodedToken.sub.toString());
-    }, []);
-  
-    //   const getCurrentUsername = () => {
-    //     fetch(BASE_URL + "/get")
-    //       .then((res) => res.stringify)
-    //       .then((res) => {
-    //         setCurrentUsername(res);
-    //         console.log("Username retrieved", res);
-    //       })
-    //       .catch((err) => console.log("Something went wrong ", err));
-    //   };
-  
-    const changeUsername = () => {
-      fetch(`${BASE_URL}/update/${user.username}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {JSON.stringif},
-      })
-        .then((data) => JSON.parse(data))
-        .then((data) => {
-          Alert.alert(`Success! Username changed to: ${data.message}`);
-          // authContext.logout();
-        })
-        .catch((err) => {
-          console.log("Error: ", err);
-        });
-    };
+  useEffect(() => {
+    console.log(username);
+    console.log(newUsername);
+    const token = authContext.authState.accessToken;
+    const decodedToken = jwtDecode(token);
+    setUsername(decodedToken.sub.toString());
+  }, []);
+
   return (
-    <View>
-      <Text>Current username: {user}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Update Username</Text>
+      <Text>Current username: {username}</Text>
       <Text>Change your username:</Text>
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setUsername(text)}
-        value={username}
+        onChangeText={(text) => setNewUsername(text)}
+        value={newUsername}
         placeholder="New username"
         textContentType="username"
       />
       <TouchableOpacity
         style={styles.btns}
-        onPress={() => changeUsername(user, username)}
+        // onPress={() => changeUsername(user, username)}
       >
         <Text style={styles.btnText}>OK</Text>
       </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+    width: "100%",
+  },
+  input: {
+    height: 50,
+    margin: 12,
+    borderWidth: 1,
+    borderRadius: 25,
+    borderColor: "#777",
+    padding: 15,
+    width: 250,
+    backgroundColor: "#fff",
+    textAlign: "center",
+  },
+  btns: {
+    width: "50%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: "#2D232E",
+    marginBottom: 20,
+  },
+  btnText: {
+    color: "#fff",
+  },
+  title: {
+    fontSize: 36,
+    marginBottom: 15,
+  },
+});
 
 export default UpdateUserForm;

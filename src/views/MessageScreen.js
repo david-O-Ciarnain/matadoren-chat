@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, StatusBar, Button } from "react-native";
+import { FlatList, StyleSheet, StatusBar, Button, View } from "react-native";
 import {
   Container,
   Card,
@@ -60,41 +60,46 @@ export default function MessageScreen({ navigation }) {
   ];
 
   return (
-    <Container>
-      <StatusBar style="auto" hidden={true} />
-      <LogoutButton />
-      <FlatList
-        data={testData}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Card
-            onPress={() => {
-              navigation.navigate("ChatScreen", { userName: item.userName });
-            }}
-          >
-            <UserInfo>
-              <UserImgWrapper>
-                <UserImg source={item.userImg} />
-              </UserImgWrapper>
-              <TextSection>
-                <UserInfoText>
-                  <UserName>{item.userName}</UserName>
-                  <PostTime>{item.messageTime}</PostTime>
-                </UserInfoText>
-                <MessageText>{item.messageText}</MessageText>
-              </TextSection>
-            </UserInfo>
-          </Card>
-        )}
-      />
-    </Container>
+    <>
+      <View style={styles.container}>
+        <LogoutButton />
+      </View>
+      <Container>
+        <StatusBar style="auto" hidden={true} />
+
+        <FlatList
+          data={testData}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Card
+              onPress={() => {
+                navigation.navigate("ChatScreen", { userName: item.userName });
+              }}
+            >
+              <UserInfo>
+                <UserImgWrapper>
+                  <UserImg source={item.userImg} />
+                </UserImgWrapper>
+                <TextSection>
+                  <UserInfoText>
+                    <UserName>{item.userName}</UserName>
+                    <PostTime>{item.messageTime}</PostTime>
+                  </UserInfoText>
+                  <MessageText>{item.messageText}</MessageText>
+                </TextSection>
+              </UserInfo>
+            </Card>
+          )}
+        />
+      </Container>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  messageScreen: {
-    flex: 1,
+  container: {
+    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });
