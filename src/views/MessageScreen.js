@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, StatusBar, Button } from "react-native";
 import {
   Container,
   Card,
@@ -11,12 +11,27 @@ import {
   TextSection,
   PostTime,
 } from "../components/style/MessagesStyles";
+import { AuthContext } from "../context/AuthContext";
+import { useContext, useEffect, useState } from "react";
+import LogoutButton from "../components/LogoutButton";
+import jwtDecode from "jwt-decode";
 
 export default function MessageScreen({ navigation }) {
+  // Line 21 - 28 is for decoding JWT tokens and accessing their username. :)
+  const authContext = useContext(AuthContext);
+  const [user, setUser] = useState("Undefined");
+
+  useEffect(() => {
+    const token = authContext.authState.accessToken;
+    const decodedToken = jwtDecode(token);
+    setUser(decodedToken.sub.toString());
+  }, []);
+
   const testData = [
     {
       id: "1",
-      userName: "demo",
+      // userName is modified here for testing purposes.
+      userName: user,
       userImg: require("../../assets/loginscreen2.jpg"),
       messageTime: "200 years ago",
       messageText: "viva la revolution",
@@ -46,6 +61,8 @@ export default function MessageScreen({ navigation }) {
 
   return (
     <Container>
+      <StatusBar style="auto" hidden={true} />
+      <LogoutButton />
       <FlatList
         data={testData}
         keyExtractor={(item) => item.id}

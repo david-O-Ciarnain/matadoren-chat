@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
-  Dimensions,
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  Button,
+  Alert,
 } from "react-native";
 import Header from "./Header";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { AxiosContext } from "../context/AxiosContext";
+import { save } from "./hooks/useSecureStore";
 
 const LoginForm = () => {
   const navigation = useNavigation();
+
+  const authContext = useContext(AuthContext);
+  const { publicAxios } = useContext(AxiosContext);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -25,20 +31,33 @@ const LoginForm = () => {
     });
   };
 
-  const handleLogin = () => {
-    console.log(
-      `Sign in Pressed! Email: ${credentials.username}, Password: ${credentials.password}`
-    );
-    navigation.navigate("BottomTabStack");
+
+  const handleLogin = async () => {
+    try {
+      const response = await publicAxios.post("/login", credentials, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const { access_token: accessToken, refresh_token: refreshToken } =
+        response.data;
+      authContext.setAuthState({
+        accessToken,
+        refreshToken,
+        authenticated: true,
+      });
+
+      await save("token", JSON.stringify({ accessToken, refreshToken }));
+    } catch (error) {
+      Alert.alert("Login Failed", error.response.data.message);
+    }
+
   };
 
   const handleRegister = () => {
-    console.log("Register Pressed!");
     navigation.navigate("RegisterScreen");
   };
 
   const handleForgot = () => {
-    console.log("Forgot password Pressed!");
     navigation.navigate("ForgotPWScreen");
   };
 

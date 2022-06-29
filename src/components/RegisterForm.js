@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -9,13 +9,13 @@ import {
   Alert,
 } from "react-native";
 import Header from "./Header";
-import { useNavigation } from "@react-navigation/native";
 import { User } from "../models/User";
-import { registerUser } from "./hooks/useUser";
+import { BASE_URL } from "@env";
+import { useNavigation } from "@react-navigation/native";
 
 const RegisterForm = () => {
-  const navigation = useNavigation();
   const [register, setRegister] = useState(new User());
+  const navigation = useNavigation();
 
   const handleChange = (name, value) => {
     setRegister({
@@ -25,10 +25,39 @@ const RegisterForm = () => {
   };
 
   const handleRegister = () => {
-    registerUser(register);
-    // TODO: Must only alert and navigate if new user was created!
-    Alert.alert("New Matadoren User created!");
-    navigation.navigate("LoginScreen");
+    fetch(BASE_URL + "/register/user/save", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: register.firstname,
+        lastName: register.lastname,
+        username: register.username,
+        email: register.email,
+        password: register.password,
+      }),
+    })
+      .then((res) => {
+        let statusCode = res.status,
+          success = res.ok;
+        res.json().then((res) => {
+          if (!success) {
+            Alert.alert(
+              `Registration Failed`,
+              `New user could not be registered, ${res.message}`
+            );
+            return;
+          }
+          Alert.alert(
+            `Registration Succeded`,
+            `User '${res.username}'\nwas registered successfully!\nPlease sign in for access to Matadoren.`
+          );
+          navigation.navigate("LoginScreen");
+        });
+      })
+      .catch((err) => Alert.alert(`Error`, `Something went wrong, ${err}`));
   };
 
   return (
