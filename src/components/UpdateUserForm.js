@@ -12,27 +12,22 @@ import { AxiosContext } from "../context/AxiosContext";
 
 const UpdateUserForm = () => {
   const [username, setUsername] = useState("");
-  const [newUsername, setNewUsername] = useState("");
+  const [newFirstname, setNewFirstname] = useState("");
+  const [newLastname, setNewLastname] = useState("");
 
   const authContext = useContext(AuthContext);
   const { authAxios } = useContext(AxiosContext);
   const [token, setToken] = useState(authContext.authState.accessToken);
 
   useEffect(() => {
-    console.log(username);
-    console.log(newUsername);
-    console.log(token);
     const decodedToken = jwtDecode(token);
     setUsername(decodedToken.sub.toString());
   }, []);
 
   const changeUsername = async () => {
     const body = {
-      username: newUsername,
-      firstName: "user",
-      lastName: "user",
-      password: "321",
-      email: "demo951@live.se",
+      firstName: newFirstname,
+      lastName: newLastname,
     };
     const headers = {
       "Content-Type": "application/json",
@@ -45,13 +40,21 @@ const UpdateUserForm = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Update Username</Text>
       <Text>Current username: {username}</Text>
-      <Text>Change your username:</Text>
+      <Text>Change your firstname:</Text>
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setNewUsername(text)}
-        value={newUsername}
-        placeholder="New username"
-        textContentType="username"
+        onChangeText={(text) => setNewFirstname(text)}
+        value={newFirstname}
+        placeholder="New firstname"
+        textContentType="name"
+      />
+      <Text>Change your lastname:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => setNewLastname(text)}
+        value={newLastname}
+        placeholder="New lastname"
+        textContentType="familyName"
       />
       <TouchableOpacity style={styles.btns} onPress={changeUsername}>
         <Text style={styles.btnText}>OK</Text>

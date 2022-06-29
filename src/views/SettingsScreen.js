@@ -17,22 +17,26 @@ const SettingsScreen = () => {
   }, []);
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <>
+      <View style={{ alignItems: "center" }}>
         <LogoutButton />
-        <UpdateUserForm />
-        {role === "ADMIN" ? (
-          <>
-            <DeleteUserForm />
-            <Text style={styles.role}>Your role is {role}</Text>
-          </>
-        ) : (
-          <>
-            <Text style={styles.role}>Your role is {role}</Text>
-          </>
-        )}
       </View>
-    </ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
+          <UpdateUserForm />
+          {role === "ADMIN" ? (
+            <>
+              <DeleteUserForm />
+              <Text style={styles.role}>Your role is {role}</Text>
+            </>
+          ) : (
+            <>
+              <Text style={styles.role}>Your role is {role}</Text>
+            </>
+          )}
+        </View>
+      </ScrollView>
+    </>
   );
 };
 
