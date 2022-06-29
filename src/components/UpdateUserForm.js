@@ -8,36 +8,55 @@ import {
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
+import { AxiosContext } from "../context/AxiosContext";
 
 const UpdateUserForm = () => {
   const [username, setUsername] = useState("");
-  const [newUsername, setNewUsername] = useState("");
+  const [newFirstname, setNewFirstname] = useState("");
+  const [newLastname, setNewLastname] = useState("");
+
   const authContext = useContext(AuthContext);
+  const { authAxios } = useContext(AxiosContext);
+  const [token, setToken] = useState(authContext.authState.accessToken);
 
   useEffect(() => {
-    console.log(username);
-    console.log(newUsername);
-    const token = authContext.authState.accessToken;
     const decodedToken = jwtDecode(token);
     setUsername(decodedToken.sub.toString());
   }, []);
+
+  const changeUsername = async () => {
+    const body = {
+      firstName: newFirstname,
+      lastName: newLastname,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token ? `team7 ${token}` : "",
+    };
+    await authAxios.put(`/register/user/update/${username}`, body, { headers });
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Update Username</Text>
       <Text>Current username: {username}</Text>
-      <Text>Change your username:</Text>
+      <Text>Change your firstname:</Text>
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setNewUsername(text)}
-        value={newUsername}
-        placeholder="New username"
-        textContentType="username"
+        onChangeText={(text) => setNewFirstname(text)}
+        value={newFirstname}
+        placeholder="New firstname"
+        textContentType="name"
       />
-      <TouchableOpacity
-        style={styles.btns}
-        // onPress={() => changeUsername(user, username)}
-      >
+      <Text>Change your lastname:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => setNewLastname(text)}
+        value={newLastname}
+        placeholder="New lastname"
+        textContentType="familyName"
+      />
+      <TouchableOpacity style={styles.btns} onPress={changeUsername}>
         <Text style={styles.btnText}>OK</Text>
       </TouchableOpacity>
     </View>
