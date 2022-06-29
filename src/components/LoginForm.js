@@ -15,8 +15,10 @@ import { save } from "./hooks/useSecureStore";
 
 const LoginForm = () => {
   const navigation = useNavigation();
+
   const authContext = useContext(AuthContext);
   const { publicAxios } = useContext(AxiosContext);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",

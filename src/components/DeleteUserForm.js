@@ -4,46 +4,55 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import jwtDecode from "jwt-decode";
-import { User } from "../models/User";
-import axios from "axios";
+import { AxiosContext } from "../context/AxiosContext";
 
-const UpdateUserForm = () => {
+const DeleteUserForm = () => {
   const [username, setUsername] = useState("");
-  const [newUsername, setNewUsername] = useState("");
   const authContext = useContext(AuthContext);
+  const { authAxios } = useContext(AxiosContext);
+
+  const [role, setRole] = useState("USER");
+  const [token, setToken] = useState(authContext.authState.accessToken);
 
   useEffect(() => {
-    console.log(username);
-    console.log(newUsername);
-    const token = authContext.authState.accessToken;
     const decodedToken = jwtDecode(token);
-    setUsername(decodedToken.sub.toString());
+    setRole(decodedToken.roles.toString());
   }, []);
 
-  const changeUsername = () => {
-    const body = { username: { username } };
-    const headers = {};
-    axios.put(`${BASE_URL}/update/${user.username}`, body, headers);
+  const removeUser = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token ? `team7 ${token}` : "",
+    };
+
+    try {
+      await authAxios
+        .delete(`/register/user/delete/${username}`, { headers })
+        .then(() => Alert.alert(`${username} was removed successfully.`))
+        .catch((err) => console.log(err));
+    } catch (error) {
+      Alert.alert(`Remove Failed`);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Update Username</Text>
-      <Text>Current username: {username}</Text>
-      <Text>Change your username:</Text>
+      <Text style={styles.title}>Remove User</Text>
+      <Text>Enter username to remove (not admins):</Text>
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setNewUsername(text)}
-        value={newUsername}
-        placeholder="New username"
+        onChangeText={(text) => setUsername(text)}
+        value={username}
+        placeholder="Username"
         textContentType="username"
       />
-      <TouchableOpacity style={styles.btns} onPress={() => changeUsername()}>
-        <Text style={styles.btnText}>OK</Text>
+      <TouchableOpacity style={styles.btns} onPress={removeUser}>
+        <Text style={styles.btnText}>REMOVE USER</Text>
       </TouchableOpacity>
     </View>
   );
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: "#2D232E",
+    backgroundColor: "#991010",
     marginBottom: 20,
   },
   btnText: {
@@ -87,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpdateUserForm;
+export default DeleteUserForm;
