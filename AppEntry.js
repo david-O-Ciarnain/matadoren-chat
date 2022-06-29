@@ -7,9 +7,11 @@ import ForgotPWScreen from "./src/views/ForgotPWScreen";
 import ChatScreen from "./src/views/ChatScreen";
 import MessageScreen from "./src/views/MessageScreen";
 import SearchScreen from "./src/views/SearchScreen";
+import SettingsScreen from "./src/views/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { getValueFor } from "./src/components/hooks/useSecureStore";
 import { AuthContext } from "./src/context/AuthContext";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -55,7 +57,7 @@ export default function AppEntry() {
     return (
       <BottomTab.Navigator screenOptions={{ headerShown: false }}>
         <BottomTab.Screen
-          name="MessageScreen"
+          name="Chats"
           component={MessageScreen}
           options={{
             tabBarIcon: () => (
@@ -69,11 +71,21 @@ export default function AppEntry() {
           }}
         />
         <BottomTab.Screen
-          name="SearchScreen"
+          name="Search"
           component={SearchScreen}
           options={{
             tabBarIcon: () => (
               <Entypo name="magnifying-glass" size={24} color="black" />
+            ),
+            headerShown: false,
+          }}
+        />
+        <BottomTab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: () => (
+              <AntDesign name="setting" size={24} color="black" />
             ),
             headerShown: false,
           }}
@@ -113,6 +125,11 @@ export default function AppEntry() {
             <Stack.Screen
               name="SearchScreen"
               component={SearchScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SettingsScreen"
+              component={SettingsScreen}
               options={{ headerShown: false }}
             />
           </>
