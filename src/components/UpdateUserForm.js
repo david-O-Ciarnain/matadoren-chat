@@ -38,8 +38,8 @@ const UpdateUserForm = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Update Username</Text>
-      <Text>Current username: {username}</Text>
+      <Text style={styles.title}>Update Userdetails</Text>
+      <Text>Username: {username}</Text>
       <Text>Change your firstname:</Text>
       <TextInput
         style={styles.input}

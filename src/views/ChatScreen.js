@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
-import { FontAwesome } from '@expo/vector-icons'; 
-import { Feather } from '@expo/vector-icons'; 
-import { View} from "react-native";
-
-
+import { FontAwesome } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { View } from "react-native";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState([]);
@@ -34,53 +32,51 @@ export default function ChatScreen() {
     ]);
   }, []);
 
+  const onSend = useCallback((messages = []) => {
+    setMessages((prevMessages) => GiftedChat.append(prevMessages, messages));
+  }, []);
 
-    const onSend = useCallback((messages = []) =>{
-        setMessages(prevMessages => GiftedChat.append(prevMessages,messages))
-    },[])
-
-    const renderBubble = (props) => {
-        return (
-           
-        <Bubble
+  const renderBubble = (props) => {
+    return (
+      <Bubble
         {...props}
         wrapperStyle={{
-            left:{
-                backgroundColor:"#550055",
-            },
-            right:{
-                backgroundColor:"#550055", 
-            }
+          left: {
+            backgroundColor: "#550055",
+          },
+          right: {
+            backgroundColor: "#550055",
+          },
         }}
         textStyle={{
-            right:{
-                color:"#fff",
-            },
-            left:{
-                color:"#fff"
-            }
+          right: {
+            color: "#fff",
+          },
+          left: {
+            color: "#fff",
+          },
         }}
-        />
+      />
+    );
+  };
+  const renderSend = (props) => {
+    return (
+      <Send {...props}>
+        <View>
+          <FontAwesome
+            name="send"
+            size={24}
+            style={{ marginBottom: 10, marginRight: 10 }}
+            color="black"
+          />
+        </View>
+      </Send>
+    );
+  };
 
-        )
-    }
-    const renderSend = (props) => {
-        return(
-            <Send {...props}>
-                <View>
-                <FontAwesome 
-                name="send" 
-                size={24} 
-                style={{marginBottom: 10,marginRight:10}} 
-                color="black" 
-                />
-                </View>
-            </Send>
-           
-        )
-    }
-
-    const scrollToBottomCompenent = () => <Feather name="chevrons-down" size={24} color="black" />
+  const scrollToBottomCompenent = () => (
+    <Feather name="chevrons-down" size={24} color="black" />
+  );
 
   return (
     <GiftedChat
@@ -90,13 +86,10 @@ export default function ChatScreen() {
         _id: 1,
       }}
       renderBubble={renderBubble}
-
       alwaysShowSend
       renderSend={renderSend}
       scrollToBottom
       scrollToBottomComponent={scrollToBottomCompenent}
-      />
-
-    )
+    />
+  );
 }
-

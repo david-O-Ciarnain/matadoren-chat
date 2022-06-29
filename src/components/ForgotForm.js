@@ -7,11 +7,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Header from "./Header";
-import { useNavigation } from "@react-navigation/native";
 
 const ForgotForm = () => {
   const [email, setEmail] = React.useState("");
-  const navigation = useNavigation();
 
   const handleForgot = () => {
     console.log(`Forgot pressed! ${email}`);

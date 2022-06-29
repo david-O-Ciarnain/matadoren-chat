@@ -46,7 +46,7 @@ const RegisterForm = () => {
           if (!success) {
             Alert.alert(
               `Registration Failed`,
-              `New user could not be registered, ${res.message}`
+              `New user could not be registered, ${statusCode}: ${res.message}`
             );
             return;
           }

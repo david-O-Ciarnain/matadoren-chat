@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, StatusBar, Button, View } from "react-native";
+import { FlatList, StyleSheet, StatusBar, View } from "react-native";
 import {
   Container,
   Card,

@@ -36,7 +36,7 @@ export default function AppEntry() {
       setStatus("success");
     } catch (error) {
       setStatus("error");
-      // console.log(`Keychain Error: ${error.message}`);
+      console.log(`SecureStore Error: ${error.message}`);
       authContext.setAuthState({
         accessToken: null,
         refreshToken: null,
@@ -117,7 +117,6 @@ export default function AppEntry() {
               name="ChatScreen"
               component={ChatScreen}
               options={({ route }) => ({
-                // this works don't know why it gives me a red line, mabey typeScript?
                 title: route.params.userName,
                 headerBackTitleVisible: false,
               })}
